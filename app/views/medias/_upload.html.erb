@@ -1,0 +1,43 @@
+<% @file_description ||= '' %>
+<%= form_tag(medias_path,{multipart: true}) do %>
+  <% if @media.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@media.errors.count, "error") %> prohibited this media from being saved:</h2>
+
+      <ul>
+      <% @media.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if @media.is_file? && @media.is_uploaded? %>
+    <div id="file_form_already_uploaded_file">
+      <label for="file_tag">Votre fichier : <%= @media.original_name %></label><br />
+      <div style="display:inline-block;text-align:center">
+        <img src="<%= @media.path(root_url) %>" alt="#" style="width:130px;height:auto;border:0" /><br />
+        <input type="hidden" id="file_id" name="file_id" value="<%= @media.id %>">
+        <a href="#" onclick='$("#file_form_already_uploaded_file").hide();$("#file_form_upload_new_file").show();$("#file_tag_replace_file_id").val("1")'>Modifier</a>
+      </div>
+    </div>
+    <div id="file_form_upload_new_file" style="display:none">
+      <label for="file_tag">Votre fichier :</label>
+      <input id="file_tag" name="file_tag" type="file" /><br />
+      <input type="hidden" name="file_tag_replace_file_id" id="file_tag_replace_file_id" value="0"/>
+      Maxsize : 3Mo, accept only jpeg, jpg, png, gif<br />
+    </div>
+  <% else %>
+    <label for="file_tag">Votre fichier :</label>
+    <input id="file_tag" name="file_tag" type="file" /><br />
+    Maxsize : 3Mo, accept only jpeg, jpg, png, gif<br /><br />
+  <% end %>
+  <br />
+  <label for="file_description">Description : </label><br />
+  <%= text_area_tag :file_description, @file_description, {cols: 40, rows: 5} %><br />
+  <!--
+  <label for="file_tag">Un fichier déjà téléchargé : </label>
+  <input id="file_tag_id" name="file_tag_id" type="text" /><br />
+  -->
+  <input id="submit_tag" type="submit" value="Envoyer" />
+<% end %>
+<br />

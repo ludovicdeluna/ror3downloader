@@ -1,0 +1,42 @@
+<h1>Listing medias</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>User</th>
+    <th>Name</th>
+    <th>Original name</th>
+    <th>Size</th>
+    <th>Session</th>
+    <th>Uploaded at</th>
+    <th>Created at</th>
+    <th>Etat</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @medias.each do |media| %>
+  <tr>
+    <td><%= media.id %></td>
+    <td><%= media.user_id %></td>
+    <td><%= media.name %></td>
+    <td><%= media.original_name %></td>
+    <td><%= media.size %></td>
+    <td><%= media.session_id %></td>
+    <td><%= media.uploaded_at %></td>
+    <td><%= media.created_at %></td>
+    <td><% if media.session_id > 0 %><b style="color:red">temporaire</b><% else %><b style="color:green">stocké</b><% end %></td>
+    <td><%= link_to 'Show', media %></td>
+    <td><%= link_to 'Edit', edit_media_path(media) %></td>
+    <td><%= link_to 'Destroy', media, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Media', new_media_path %> | <%= link_to 'Show notes', notes_path %><br />
+<hr />
+Vous êtes la <%= link_to 'session', sessions_path %> n° <%= session_id %><br />
+

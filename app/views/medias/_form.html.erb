@@ -1,0 +1,61 @@
+<%= form_for(@media) do |f| %>
+  <% if @media.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@media.errors.count, "error") %> prohibited this media from being saved:</h2>
+
+      <ul>
+      <% @media.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :original_name %><br />
+    <%= f.text_field :original_name %>
+  </div>
+  <div class="field">
+    <%= f.label :size %><br />
+    <%= f.text_field :size %>
+  </div>
+  <div class="field">
+    <%= f.label :session_id %><br />
+    <%= f.text_field :session_id %>
+  </div>
+  <div class="field">
+    <%= f.label :uploaded_at %><br />
+    <%= f.datetime_select :uploaded_at %>
+  </div>
+  <div class="field">
+    <%= f.label :created_at %><br />
+    <%= f.datetime_select :created_at %>
+  </div>
+  <%= f.fields_for :note, @media.note do |n| %>
+    <%= n.label :description %><br />
+    <%= n.text_area :description, {rows: 5} %>
+  <% end %>
+  <div class="actions">
+    <%= f.submit 'mettre à jour' %>
+  </div>
+<% end %>
+<hr />
+Warning : La suppression est définitive
+<%= form_for(@media, {method: 'delete', html: {id: "delete_media_#{@media.id}", class: 'delete_media' } }) do |f| %>
+  <div class="actions" style="text-align: center">
+    <% if @media.is_file? -%>
+    <img src="<%= @media.path(root_url) %>" alt="#" style="width:200px;height:auto;border:0" />
+    <br />
+    <% end -%>
+    <%= f.submit 'supprimer' %>
+  </div>
+<% end %>
+<hr />

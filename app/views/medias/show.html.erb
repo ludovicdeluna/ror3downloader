@@ -1,0 +1,51 @@
+<p>
+  <b>User:</b>
+  <%= @media.user_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @media.name %>
+</p>
+
+<p>
+  <b>Original name:</b>
+  <%= @media.original_name %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%= @media.size %>
+</p>
+
+<p>
+  <b>Session:</b>
+  <%= @media.session_id %>
+</p>
+
+<p>
+  <b>Uploaded at:</b>
+  <%= @media.uploaded_at %>
+</p>
+
+<p>
+  <b>Created at:</b>
+  <%= @media.created_at %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @media.note.description %>
+</p>
+
+
+<% if @media.is_file? -%>
+  <div style="text-align:center">
+    <a href="<%= @media.path(root_url) %>">Agrandir</a><br /><br /><img src="<%= @media.path(root_url) %>" alt="#" style="width:200px;height:auto;border:0" />
+    <br />
+  </div>
+<% end -%>
+
+
+<%= link_to 'Edit', edit_media_path(@media) %> |
+<%= link_to 'Back', medias_path %>

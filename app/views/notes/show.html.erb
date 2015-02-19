@@ -1,0 +1,15 @@
+<% if false %><p id="notice"><%= notice %></p><% end %>
+
+<p>
+  <b>Media:</b>
+  <%= @note.media_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @note.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', notes_path %>

@@ -1,0 +1,29 @@
+<%
+  # Initialize
+  @avatars ||= []
+  
+%>
+<%= form_tag(test_path,{multipart: true}) do %>
+  <label for="file_tag">Votre fichier : </label>
+  <input id="file_tag" name="file_tag" type="file" /><br />
+  <label for="file_tag">Un fichier déjà téléchargé : </label>
+  <input id="file_tag_id" name="file_tag_id" type="text" /><br />
+  <input id="submit_tag" type="submit" value="Envoyer" />
+<% end %>
+Maxsize : 3Mo, accept only jpeg, jpg, png, gif
+<hr />
+<br />
+Nombre de fichiers : <%= @avatars.count %><br />
+<% @avatars.each do |avatar| %>
+  [ <%= avatar.id %> - <%= avatar.name %> ] <%= link_to avatar.original_name, avatar.path(root_url) %>
+  <%= form_tag(test_path(id: avatar.id),{method: "delete", style: "display:inline"}) do %>
+    <input id="submit_tag" type="submit" value="supprimer" style="display:inline" />
+  <% end %>
+  <br />
+<% end %>
+<hr />
+Deleting on id<br />
+<%= form_tag(test_path(id: 165),{method: "delete"}) do %>
+  <input id="submit_tag" type="submit" value="supprimer le 165" />
+<% end %>
+
